@@ -13,6 +13,9 @@ Was möchten Sie insbesondere dabei lernen oder üben? Ich möchte Lernen, wie m
 Heute habe als erstes meine Skizzen für die Seite gemacht, die SKizzen sind nicht sehr gut, und anderst als ich es jetzt umgesetz habe, da ich es so doch besser fand. Als nächstes habe ich probiert die Seite so zu desingen/generieren wie auf den Bildern. Da ich das nicht verstanden habe, habe ich das Desing halt gewchselt, so das ich es verstehe.
 
 
+![WhatsApp Bild 2025-10-24 um 11 46 28_eb442cbe](https://github.com/user-attachments/assets/f1a07a42-b9a7-48be-b30b-6a50ed6b8ca1)
+
+
 31.10.
 - [ ] Die Tabelle für die Premier League einfügen (Mit Daten)
 - [ ] Für die Anderen wichtigen Ligen auch die Tabellen machen
