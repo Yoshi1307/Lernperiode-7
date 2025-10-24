@@ -1,0 +1,127 @@
+/* --- Grundlayout --- */
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f4f6f8;
+  color: #222;
+}
+
+/* --- Navigationsleiste --- */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(90deg, #047857, #1e293b);
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between; /* ← sorgt für Abstand links/rechts */
+  align-items: center;
+}
+
+#site-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+#site-title:hover {
+  color: #6ee7b7;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: #6ee7b7;
+}
+/* --- Startseite mit Logo --- */
+main.home {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.home-logo {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #065f46;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* --- Responsivität --- */
+@media (max-width: 700px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .home-logo {
+    font-size: 2.8rem;
+  }
+}
+
+/* --- Tabellen-Styling --- */
+.league-table {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.premier-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.premier-table th {
+  background-color: #047857;
+  color: white;
+  text-align: left;
+  padding: 10px;
+}
+
+.premier-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.premier-table tr:hover {
+  background-color: #f1f5f9;
+}
+
+.team-logo {
+  width: 22px;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+

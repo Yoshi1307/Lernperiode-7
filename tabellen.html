@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premier League Tabelle – MatchVision</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+
+    <nav>
+      <div class="nav-container">
+        <a href="index.html" id="site-title">MatchVision</a>
+        <div class="nav-links">
+          <a href="mein-verein.html">Mein Verein</a>
+          <a href="tabellen.html" class="active">Tabellen</a>
+          <a href="topscorer.html">Topscorer</a>
+          <a href="meister.html">Meister</a>
+          <a href="spielerstats.html">Spieler-Stats</a>
+          <a href="naechste-spiele.html">Nächste Spiele</a>
+        </div>
+      </div>
+    </nav>
+
+    <main style="margin-top: 120px;">
+      <h1>Premier League Tabelle</h1>
+      <div id="table-container" class="league-table">Lade Daten...</div>
+    </main>
+
+    <!-- Script -->
+    <script>
+      const apiUrl = "https://football98.p.rapidapi.com/premierleague/table";
+      const options = {
+        method: "GET",
+        headers: {
+          "X-RapidAPI-Key": " Geheimer Key", // 🔹 Deinen API Key hier einfügen!
+          "X-RapidAPI-Host": "football98.p.rapidapi.com",
+        },
+      };
+
+      async function ladeTabelle() {
+        const container = document.getElementById("table-container");
+        container.innerHTML = "Lade Daten...";
+
+        try {
+          const response = await fetch(apiUrl, options);
+          const data = await response.json();
+
+          // HTML-Tabelle erstellen
+          const table = document.createElement("table");
+          table.classList.add("premier-table");
+
+          // Tabellenkopf
+          const header = document.createElement("tr");
+          header.innerHTML = `
+            <th>#</th>
+            <th>Team</th>
+            <th>Spiele</th>
+            <th>Siege</th>
+            <th>Unentschieden</th>
+            <th>Niederlagen</th>
+            <th>Punkte</th>
+          `;
+          table.appendChild(header);
+
+          // Teams einfügen
+          data.forEach((team, index) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${index + 1}</td>
+              <td><img src="${team.Crest}" alt="" class="team-logo"> ${team.Team}</td>
+              <td>${team.Played}</td>
+              <td>${team.W}</td>
+              <td>${team.D}</td>
+              <td>${team.L}</td>
+              <td><strong>${team.Points}</strong></td>
+            `;
+            table.appendChild(row);
+          });
+
+          container.innerHTML = "";
+          container.appendChild(table);
+        } catch (err) {
+          console.error(err);
+          container.innerHTML =
+            "<p style='color:red;'>Fehler beim Laden der Daten.</p>";
+        }
+      }
+
+      ladeTabelle();
+    </script>
+  </body>
+</html>
