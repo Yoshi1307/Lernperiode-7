@@ -21,6 +21,10 @@ Heute habe als erstes meine Skizzen für die Seite gemacht, die SKizzen sind nic
 - [ ] Für die Anderen wichtigen Ligen auch die Tabellen machen
 - [ ] Das Selbe für die Torschützenkönige zu machen. (Tabelle erstellen und Daten beziehen)
 
-✍️ Heute habe ich... (50-100 Wörter)
+Heute habe ich zuerst damit begonnen, meine Webseite etwas zu verschönern. Es war nicht sehr viel, aber ein bisschen. Danach habe ich weiter versucht, die Tabelle der Premier League bei mir angezeigt zu bekommen. Ich habe sehr lange herumprobiert, bis ich gelesen habe, dass die API seit Sommer 2024 nicht mehr aktualisiert wird. Also habe ich begonnen, eine neue API zu suchen. Ich habe viel gefunden, aber keine von ihnen hat funktioniert oder war kostenlos. Heute konnte ich also fast nichts machen und habe keine funktionierende API mehr.
 
-☝️ Vergessen Sie nicht, Ihren Code auf github hochzuladen
+7.11.
+- [ ] Irgendeine funktionierende und Kostenlose API finden
+- [ ] Die Tabelle der Premier League (oder irgendeiner Liga) einfügen
+- [ ] Die anderen Tabellen einfügen
+
