@@ -87,7 +87,29 @@ main.home {
   }
 }
 
-/* --- Tabellen-Styling --- */
+/*Mein Verein*/
+.mein-verein{
+  margin-top: 120px;
+  text-align: center; 
+}
+
+/*Topscorer*/
+.topscorer-title {
+  margin-top: 120px;
+  text-align: center; 
+}
+
+/*Meister*/
+.meister {
+  margin-top: 120px;
+  text-align: center; 
+}
+/*Tabellen*/
+.league-table-name {
+  margin-top: 120px;
+  text-align: center;
+}
+
 .league-table {
   max-width: 900px;
   margin: 0 auto;
