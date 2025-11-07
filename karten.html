@@ -3,14 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MatchVision</title>
-
+    <title>Karten - Clash Royale</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-
   <body>
-
-     <nav>
+    <nav>
       <div class="nav-container">
         <a href="index.html" id="site-title">ClashStats</a>
         <div class="nav-links">
@@ -22,12 +19,20 @@
       </div>
     </nav>
 
+  <h1>Alle Clash Royale Karten</h1>
 
-    <main class="home">
+    <div class="controls">
+    <label for="sortSelect">Sortieren nach:</label>
+    <select id="sortSelect">
+      <option value="none">Nicht Sortiert</option>
+      <option value="elixirAsc">Elixierkosten (aufsteigend)</option>
+      <option value="elixirDesc">Elixierkosten (absteigend)</option>
+      <option value="rarity">Seltenheit</option>
+    </select>
+  </div>
 
-      <h1>Willkommen aud ClashStats</h1>
- 
-    </main>
+  <div id="cards" class="cards"></div>
+
     <script src="script.js"></script>
   </body>
 </html>

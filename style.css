@@ -87,63 +87,45 @@ main.home {
   }
 }
 
-/*Mein Verein*/
-.mein-verein{
-  margin-top: 120px;
-  text-align: center; 
+/* Karten und Dropdownmenü */
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-/*Topscorer*/
-.topscorer-title {
-  margin-top: 120px;
-  text-align: center; 
+select {
+  padding: 5px 10px;
+  border-radius: 5px; 
+  border: none;
+  font-size: 16px;
 }
 
-/*Meister*/
-.meister {
-  margin-top: 120px;
-  text-align: center; 
-}
-/*Tabellen*/
-.league-table-name {
-  margin-top: 120px;
-  text-align: center;
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
 }
 
-.league-table {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.premier-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 1rem;
-}
-
-.premier-table th {
-  background-color: #047857;
-  color: white;
-  text-align: left;
+.card {
+  background-color: #ffffff;
+  border-radius: 10px;
   padding: 10px;
+  width: 160px;
+  text-align: center;
+  transition: transform 0.2s;
 }
 
-.premier-table td {
-  padding: 8px 10px;
-  border-bottom: 1px solid #ddd;
+.card:hover {
+  transform: scale(1.05);
 }
 
-.premier-table tr:hover {
-  background-color: #f1f5f9;
+.card img {
+  width: 100px;
+  height: auto;
+  border-radius: 8px;
 }
-
-.team-logo {
-  width: 22px;
-  vertical-align: middle;
-  margin-right: 8px;
-}
-
