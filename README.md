@@ -24,7 +24,16 @@ Heute habe als erstes meine Skizzen für die Seite gemacht, die SKizzen sind nic
 Heute habe ich zuerst damit begonnen, meine Webseite etwas zu verschönern. Es war nicht sehr viel, aber ein bisschen. Danach habe ich weiter versucht, die Tabelle der Premier League bei mir angezeigt zu bekommen. Ich habe sehr lange herumprobiert, bis ich gelesen habe, dass die API seit Sommer 2024 nicht mehr aktualisiert wird. Also habe ich begonnen, eine neue API zu suchen. Ich habe viel gefunden, aber keine von ihnen hat funktioniert oder war kostenlos. Heute konnte ich also fast nichts machen und habe keine funktionierende API mehr.
 
 7.11.
-- [ ] Irgendeine funktionierende und Kostenlose API finden
+- [X] Irgendeine funktionierende und Kostenlose API finden
 - [ ] Die Tabelle der Premier League (oder irgendeiner Liga) einfügen
 - [ ] Die anderen Tabellen einfügen
+
+Heute habe ich wieder da weitergemacht, wo ich beim letzten Mal aufgehört habe, auf der Suche nach einer funktionierenden, kostenlosen Fussball-API. Kurzzeitig hatte ich etwas gefunden, mit dem ich aber doch nichts anfangen konnte, da ich für alle Sachen, die ich für mein Projekt wollte, hätte bezahlen müssen. Weil ich nicht mehr weiter nach Fussball-APIs suchen wollte, machte ich mich auf die Suche nach einem anderen Thema für meine Seite. Ich entschied mich schlussendlich für Clash Royale. Auf meiner Seite kann man jetzt alle Karten, die es im Spiel gibt, ansehen und sehen, wie viel sie kosten und welche Seltenheit sie haben. Man kann sie auch sortieren. Den Rest der Zeit habe ich noch meine HTML-Dateien angepasst, so, dass sie jetzt einigermassen auf Clash Royale abgestimmt sind.
+
+14.11
+- [ ] Desing der Seite ändern
+- [ ] Das eigene Proifl suchen können
+- [ ] Kartenlevel seiner Truppen sehen können
+- [ ] Aktives Deck sehen können
+
 
