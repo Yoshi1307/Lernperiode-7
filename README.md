@@ -33,7 +33,13 @@ Heute habe ich wieder da weitergemacht, wo ich beim letzten Mal aufgehört habe,
 14.11
 - [ ] Desing der Seite ändern
 - [ ] Das eigene Proifl suchen können
-- [ ] Kartenlevel seiner Truppen sehen können
-- [ ] Aktives Deck sehen können
+- [X] Kartenlevel seiner Truppen sehen können
+- [X] Aktives Deck sehen können
 
+Heute habe ich als erstes eine Suchfunktion hinzugefügt mit der man ein Profil via Spieler-ID finden kann. Jetzt habe ich begonnen mit  einem Knopf, es findet aber immer das selbe Profil, weil ich das so eingestellt habe, dass ich die Daten formatieren kann und anpassen kann, was angezeigt werden soll. Jetzt sieht man den Kampflog des Spielers, alle seine Karten und Kartenlevel. 
 
+21.11
+- [ ] Desing der Seite ändern
+- [ ] Das eigene Proifl suchen können
+- [ ] Die ergebnisse anpassen
+- [ ] Leaderbord einfügen
