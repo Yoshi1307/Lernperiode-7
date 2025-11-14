@@ -1,4 +1,7 @@
-/* --- Grundlayout --- */
+/* =============================
+   GLOBAL
+============================= */
+
 body {
   margin: 0;
   font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -6,7 +9,10 @@ body {
   color: #222;
 }
 
-/* --- Navigationsleiste --- */
+/* =============================
+   NAVIGATION
+============================= */
+
 nav {
   position: fixed;
   top: 0;
@@ -17,12 +23,13 @@ nav {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
 }
+
 .nav-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem 2rem;
   display: flex;
-  justify-content: space-between; /* ← sorgt für Abstand links/rechts */
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -38,6 +45,22 @@ nav {
   color: #6ee7b7;
 }
 
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#playerTag {
+  padding: 8px 10px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 2px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  width: 220px;
+}
+
 .nav-links {
   display: flex;
   gap: 1.5rem;
@@ -47,76 +70,45 @@ nav {
   color: white;
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.2s;
 }
 
 .nav-links a:hover {
   color: #6ee7b7;
 }
-/* --- Startseite mit Logo --- */
-main.home {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
 
-.home-logo {
-  font-size: 4rem;
-  font-weight: 800;
-  color: #065f46;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-}
+/* =============================
+   KARTEN-SEITE
+============================= */
 
-/* --- Responsivität --- */
-@media (max-width: 700px) {
-  .nav-container {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .nav-links {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .home-logo {
-    font-size: 2.8rem;
-  }
-}
-
-/* Karten und Dropdownmenü */
 .controls {
+  margin-top: 120px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-bottom: 30px;
-  gap: 10px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 select {
-  padding: 5px 10px;
-  border-radius: 5px; 
+  padding: 6px 12px;
+  border-radius: 6px;
   border: none;
   font-size: 16px;
 }
 
 .cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
+  margin: 20px auto;
+  max-width: 1000px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
 }
 
 .card {
-  background-color: #ffffff;
+  background: white;
+  padding: 12px;
   border-radius: 10px;
-  padding: 10px;
-  width: 160px;
   text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   transition: transform 0.2s;
 }
 
@@ -125,7 +117,161 @@ select {
 }
 
 .card img {
-  width: 100px;
+  width: 90px;
   height: auto;
   border-radius: 8px;
+}
+
+/* =============================
+   PROFIL
+============================= */
+
+.profile-box {
+  max-width: 900px;
+  margin: 140px auto 30px auto;
+  padding: 25px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.profile-deck {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 15px;
+}
+
+.profile-card {
+  text-align: center;
+}
+
+.profile-card img {
+  width: 70px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.level {
+  font-size: 13px;
+  margin-top: 3px;
+  color: #444;
+}
+
+/* =============================
+   BATTLELOG
+============================= */
+
+.battle-box {
+  max-width: 900px;
+  margin: 20px auto 40px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.battle-entry {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 25px;
+  margin-bottom: 25px;
+}
+
+.battle-entry:last-child {
+  border-bottom: none;
+}
+
+.battle-header {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.mode {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.deck-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.battle-card {
+  text-align: center;
+}
+
+.battle-card img {
+  width: 60px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.battle-card .level {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+profile-box, .battle-box {
+  max-width: 900px;
+  margin: 20px auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+}
+
+.player-deck, .deck-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.deck-card, .battle-card {
+  width: 70px;
+  text-align: center;
+}
+
+.deck-card img, .battle-card img {
+  width: 70px;
+  border-radius: 8px;
+}
+
+.battle-entry {
+  margin-bottom: 35px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.battle-decks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.deck-column {
+  width: 48%;
+}
+
+/* =============================
+   RESPONSIVE
+============================= */
+
+@media (max-width: 700px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .deck-row,
+  .profile-deck {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .profile-card img,
+  .battle-card img {
+    width: 50px;
+  }
 }

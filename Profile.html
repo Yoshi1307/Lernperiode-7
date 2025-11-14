@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spielerprofil – MatchVision</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" id="site-title">ClashStats</a>
+
+      <div class="nav-right">
+        <input type="text" id="playerTag" placeholder="SpielerID eingeben">
+
+        <div class="nav-links">
+          <a href="dein-account.html">Dein Account</a>
+          <a href="karten.html">Karten</a>
+          <a href="leaderboard.html">Rangliste</a>
+          <a href="clan.html">Clan</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SEITENINHALT -->
+  <main>
+    <h1 style="margin-top:120px; text-align:center;">Spielerprofil</h1>
+
+    <div class="profile-box">
+      <div id="playerOutput">Lade Spieler...</div>
+    </div>
+
+    <h2 style="text-align:center; margin-top:40px;">Letzte Kämpfe</h2>
+
+    <div class="battle-box" id="battlelogOutput">
+      Lade Kampflog...
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

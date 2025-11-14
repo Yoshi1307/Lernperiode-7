@@ -10,24 +10,42 @@
 
   <body>
 
-     <nav>
+  <nav>
       <div class="nav-container">
         <a href="index.html" id="site-title">ClashStats</a>
-        <div class="nav-links">
-          <a href="dein-account.html">Dein Account</a>
-          <a href="karten.html" class="active">Karten</a>
-          <a href="leaderboard.html">Rangliste</a>
-          <a href="clan.html">Clan</a>
-        </div>
+      <div class="nav-right">
+        <input type="text" id="playerTag" placeholder="SpielerID eingeben">
+      <div class="nav-links">
+        <a href="dein-account.html">Dein Account</a>
+        <a href="karten.html" class="active">Karten</a>
+        <a href="leaderboard.html">Rangliste</a>
+        <a href="clan.html">Clan</a>
       </div>
-    </nav>
+      </div>
+      </div>
+
+  </nav>
 
 
     <main class="home">
 
-      <h1>Willkommen aud ClashStats</h1>
+      <h1>Willkommen auf ClashStats</h1>
  
     </main>
     <script src="script.js"></script>
   </body>
 </html>
+
+
+<script>
+document.getElementById("playerTag").addEventListener("keyup", function (event) {
+  if (event.key === "Enter") {
+
+    const tag = this.value.trim().replace("#", "").toUpperCase();
+    if (!tag) return;
+
+    // Weiterleiten zu profile.html
+    window.location.href = `profile.html?tag=${tag}`;
+  }
+});
+</script>
