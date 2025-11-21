@@ -39,7 +39,16 @@ Heute habe ich wieder da weitergemacht, wo ich beim letzten Mal aufgehört habe,
 Heute habe ich als erstes eine Suchfunktion hinzugefügt mit der man ein Profil via Spieler-ID finden kann. Jetzt habe ich begonnen mit  einem Knopf, es findet aber immer das selbe Profil, weil ich das so eingestellt habe, dass ich die Daten formatieren kann und anpassen kann, was angezeigt werden soll. Jetzt sieht man den Kampflog des Spielers, alle seine Karten und Kartenlevel. 
 
 21.11
-- [ ] Desing der Seite ändern
-- [ ] Das eigene Proifl suchen können
-- [ ] Die ergebnisse anpassen
+- [X] Desing der Seite ändern
+- [X] Das eigene Profil suchen können
+- [X] Die ergebnisse anpassen
 - [ ] Leaderbord einfügen
+
+Heute habe ich als Erstes etwas das Design verändert. Als Nächstes habe ich die Ansicht des gesuchten Profils verändert, sodass es besser aussieht, übersichtlicher und symmetrischer ist. Den Rest der Zeit habe ich damit verbracht, den Teil im Code zu verändern, der das gesuchte Profil auf nur 1 Profil beschränkt. Jetzt kann man ganz einfach die Spieler-ID ins Suchfeld eingeben und die dazugehörigen Spielerdaten einsehen.
+
+
+28.11
+
+- [ ] Code vereinfachen
+- [ ] Die Namen und Tags im Kampflog zu Links zum jeweiligen Profil machen
+- [ ] Leaderbord hinzufügen
