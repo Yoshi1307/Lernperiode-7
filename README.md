@@ -49,6 +49,16 @@ Heute habe ich als Erstes etwas das Design verändert. Als Nächstes habe ich di
 
 28.11
 
-- [ ] Code vereinfachen
-- [ ] Die Namen und Tags im Kampflog zu Links zum jeweiligen Profil machen
-- [ ] Leaderbord hinzufügen
+- [X] Code vereinfachen
+- [X] Die Namen und Tags im Kampflog zu Links zum jeweiligen Profil machen
+- [X] Leaderbord hinzufügen
+
+
+Heute habe ich als erstes Versucht den Code etwas zu vereinfachen/kürez was bisschen geklappt hat aber nicht sehr viel zu verändern war. Als nächstes habe ich die Spielernamen und SpielerIDs im Kampflog zu Links zu deren Profil gemacht, hierfür habe ich ein bisschen gebraucht, obwohl es gar nicht so schwer gewesen wäre. Das mit dem Leaderboard funktioniert auch, einfach ist es nicht die AKtuelle sondern die letzte Season. Ich habe einfach noch kein CSS dafür.
+
+
+12.12
+
+- [ ] Leaderboard auf die Aktuelle Season Updaten
+- [ ] CSS Code dafür schreiben
+- [ ] Möglichkeit sich mit seinem Profil anmelden zu können, um bei dein Account sein eigenes Profil angezeigen zu lassen.
