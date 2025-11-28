@@ -215,6 +215,11 @@ select {
   margin-bottom: 8px;
 }
 
+.deck-player-name a{
+  color: black;
+  text-decoration: none;
+}
+
 .deck-row {
   display: grid;
  grid-template-columns: repeat(4, 85px);

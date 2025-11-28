@@ -57,118 +57,96 @@ if (cardsContainer) {
 
   loadCards();
 }
-
-
 // ========================================
-// 2. SPIELERPROFIL + BATTLELOG
+// 2. SPIELERPROFIL + BATTLELOG 
 // ========================================
 
 const playerOutput = document.getElementById("playerOutput");
 const battleOutput = document.getElementById("battlelogOutput");
 const playerInput = document.getElementById("playerTag");
+const API_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjY1NzcwMmYyLWQ5YmUtNDFmNS1iNGNkLTM5YjUyYzJjZTQwZSIsImlhdCI6MTc2MjUwODQwNywic3ViIjoiZGV2ZWxvcGVyL2Y1ZjU0M2U4LTZhMjQtNzc5Mi05ZmIyLWMyM2ZhNjkzODZiZCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI0NS43OS4yMTguNzkiLCI4NC43NC45MC4zOCJdLCJ0eXBlIjoiY2xpZW50In1dfQ.nYBRqkSupsahIdk-macnZ0oVqxDdeLunFEEUj3OVKugz5qD2vUxDYTMlztqxthCVjemlcIUwHD7MCXfXZDaA-w";
 
-if (playerOutput && battleOutput) {
+if (playerOutput && battleOutput && playerInput) {
 
-  const API_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjY1NzcwMmYyLWQ5YmUtNDFmNS1iNGNkLTM5YjUyYzJjZTQwZSIsImlhdCI6MTc2MjUwODQwNywic3ViIjoiZGV2ZWxvcGVyL2Y1ZjU0M2U4LTZhMjQtNzc5Mi05ZmIyLWMyM2ZhNjkzODZiZCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI0NS43OS4yMTguNzkiLCI4NC43NC45MC4zOCJdLCJ0eXBlIjoiY2xpZW50In1dfQ.nYBRqkSupsahIdk-macnZ0oVqxDdeLunFEEUj3OVKugz5qD2vUxDYTMlztqxthCVjemlcIUwHD7MCXfXZDaA-w";
-
-  // Hilfsfunktion: Tag korrekt encoden
-  function getPlayerTag() {
-    // 1) Quelle: Eingabefeld, dann URL-Parameter 'tag', dann localStorage
-    let raw = "";
-    if (playerInput && playerInput.value && playerInput.value.trim()) {
-      raw = playerInput.value.trim();
-    } else {
-      const params = new URLSearchParams(window.location.search);
-      raw = params.get('tag') || localStorage.getItem('lastPlayerTag') || "";
-    }
-
-    // Falls aus URL kommt, decode
-    try {
-      raw = decodeURIComponent(raw);
-    } catch (e) {
-      // ignore
-    }
-
-    if (!raw) return "";
-
-    // Normalisiere: wir erwarten später ein URL-encoded Tag wie %23XXXX
-    if (!raw.startsWith('#') && !raw.startsWith('%23')) raw = '#'+raw.replace('%23','').replace('#','');
-    // speichere lesbare Form im localStorage für andere Seiten
-    try { localStorage.setItem('lastPlayerTag', raw); } catch (e) {}
-
-    // gebe URL-encoded Form zurück (%23 statt #)
-    if (raw.startsWith('#')) return '%23' + raw.slice(1);
-    return raw;
-  }
-
-  // Wenn ein Tag per URL übergeben wurde oder im localStorage ist, fülle das Eingabefeld
-  (function initPlayerInputFromUrlOrStorage(){
-    if (!playerInput) return;
-    const params = new URLSearchParams(window.location.search);
-    let tag = params.get('tag') || localStorage.getItem('lastPlayerTag') || "";
-    if (tag) {
-      try { tag = decodeURIComponent(tag); } catch(e) {}
-      // Falls als %23xxx kommt, ersetze durch '#'
-      if (tag.startsWith('%23')) tag = '#' + tag.slice(3);
-      playerInput.value = tag;
-    }
-
-    // Eingabe: Enter → Suche auslösen; auf anderen Seiten zu Profile navigieren
-    playerInput.addEventListener('keydown', function(e){
-      if (e.key !== 'Enter') return;
-      e.preventDefault();
-      const raw = playerInput.value.trim();
-      if (!raw) return;
-      // sichere lesbare Form
-      const readable = raw.startsWith('#') ? raw : ('#'+raw.replace('%23','').replace('#',''));
-      try { localStorage.setItem('lastPlayerTag', readable); } catch(e) {}
-
-      // Wenn wir bereits auf der Profilseite sind, lade neu, sonst navigiere dorthin mit param
-      const path = window.location.pathname.split('/').pop().toLowerCase();
-      if (path === 'profile.html' || path === 'profile.htm') {
-        loadPlayerAndBattlelog();
-      } else {
-        const encoded = encodeURIComponent(readable);
-        window.location.href = `Profile.html?tag=${encoded}`;
-      }
-    });
-  })();
-
-  // Hilfsfunktion: echte Kartenlevel berechnen
+  // Kartenlevel-Umrechnung
   function getRealCardLevel(card) {
     const base = card.level;
     switch (card.maxLevel) {
-      case 14: return base;
-      case 12: return base + 2;
-      case 9:  return base + 5;
-      case 6:  return base + 8;
-      case 4:  return base + 10;
+      case 16: return base;
+      case 14: return base + 2;
+      case 11: return base + 5;
+      case 8:  return base + 8;
+      case 6:  return base + 10;
     }
     return base;
   }
 
-  // Hilfsfunktion: Bild-URL für Karten
-  function getCardImage(card) {
-    if (card.evolutionLevel > 0 && card.evolutionIconUrls)
-      return card.evolutionIconUrls.medium;
-    return card.iconUrls.medium;
+  // Kartenbild wählen
+  const getCardImage = c =>
+    (c.evolutionLevel > 0 && c.evolutionIconUrls ? c.evolutionIconUrls.medium : c.iconUrls.medium);
+
+  // Kartenrendering für Decks
+  const renderCards = (cards, className) => cards.map(c => `
+    <div class="${className}">
+      <img src="${getCardImage(c)}">
+      <small>Lvl ${getRealCardLevel(c)}</small>
+    </div>
+  `).join("");
+
+
+  // Tag initialisieren
+  function initPlayerTag() {
+    if (playerInput.value.trim() === "") {
+      const params = new URLSearchParams(window.location.search);
+      let tag = params.get('tag') || localStorage.getItem('lastPlayerTag') || "";
+      if (tag) {
+        tag = tag.replace(/^#|^%23/, '');
+        playerInput.value = '#' + tag;
+      }
+    }
   }
 
-  // Hauptfunktion: Spielerprofil + Battlelog laden
-  function loadPlayerAndBattlelog() {
-    const PLAYER_TAG = getPlayerTag();
-    const playerURL = `https://proxy.royaleapi.dev/v1/players/${PLAYER_TAG}`;
-    const battleURL = `https://proxy.royaleapi.dev/v1/players/${PLAYER_TAG}/battlelog`;
 
-    // ---- PROFIL LADEN ----
-    fetch(playerURL, {
-      headers: { Authorization: `Bearer ${API_TOKEN}` }
-    })
-      .then(r => {
-        if (!r.ok) throw new Error('Spieler nicht gefunden oder API-Fehler!');
-        return r.json();
-      })
+  // HAUPTFUNKTION
+  function loadPlayerAndBattlelog() {
+
+    // --- TAG EINLESEN ---
+    let raw = playerInput.value.trim().replace(/^#|^%23/, '');
+
+    if (!raw) {
+      playerOutput.innerHTML = `<div style="text-align:center;padding:20px;">Bitte Spieler-Tag eingeben.</div>`;
+      battleOutput.innerHTML = "";
+      return;
+    }
+
+    const displayTag = "#" + raw;
+    const apiTag = "%23" + raw;
+
+    playerInput.value = displayTag;
+    localStorage.setItem("lastPlayerTag", displayTag);
+
+    // URL aktualisieren
+    const newUrl = `${location.protocol}//${location.host}${location.pathname}?tag=${encodeURIComponent(displayTag)}`;
+    history.pushState({ path: newUrl }, '', newUrl);
+
+    // Weiterleitung, falls falsche Seite
+    const path = location.pathname.split('/').pop().toLowerCase();
+    if (path !== 'profile.html' && path !== 'profile.htm') {
+      location.href = `Profile.html?tag=${encodeURIComponent(displayTag)}`;
+      return;
+    }
+
+    // URLs
+    const playerURL = `https://proxy.royaleapi.dev/v1/players/${apiTag}`;
+    const battleURL = `https://proxy.royaleapi.dev/v1/players/${apiTag}/battlelog`;
+
+    // ===========================================
+    //  ---- PROFIL LADEN (Fetch 1) ----
+    // ===========================================
+    fetch(playerURL, { headers: { Authorization: `Bearer ${API_TOKEN}` } })
+      .then(r => r.ok ? r.json() : Promise.reject("Spieler nicht gefunden"))
       .then(data => {
+
         playerOutput.innerHTML = `
           <div class="profile-box">
             <h2>${data.name} <span style="color:#888">(${data.tag})</span></h2>
@@ -182,109 +160,156 @@ if (playerOutput && battleOutput) {
 
             <h3>Deck</h3>
             <div class="player-deck">
-              ${data.currentDeck.map(c => `
-                <div class="deck-card">
-                  <img src="${getCardImage(c)}">
-                  <small>Lvl ${getRealCardLevel(c)}</small>
-                </div>
-              `).join("")}
+              ${renderCards(data.currentDeck, "deck-card")}
             </div>
           </div>
         `;
       })
-      .catch(err => playerOutput.innerHTML = `<div style='color:red;text-align:center;'>${err.message}</div>`);
+      .catch(() => playerOutput.innerHTML = "Fehler beim Laden des Profils");
 
-    // ---- BATTLELOG LADEN ----
-    fetch(battleURL, {
-      headers: { Authorization: `Bearer ${API_TOKEN}` }
-    })
-      .then(r => {
-        if (!r.ok) throw new Error('Kampflog nicht gefunden oder API-Fehler!');
-        return r.json();
-      })
-      .then(data => {
-        if (!Array.isArray(data) || data.length === 0) {
-          battleOutput.innerHTML = `<div style='color:red;text-align:center;'>Kein Kampflog gefunden!</div>`;
+
+    // ===========================================
+    //  ---- BATTLELOG LADEN (Fetch 2) ----
+    // ===========================================
+    fetch(battleURL, { headers: { Authorization: `Bearer ${API_TOKEN}` } })
+      .then(r => r.ok ? r.json() : Promise.reject("Battlelog nicht gefunden"))
+      .then(battles => {
+
+        if (!Array.isArray(battles) || battles.length === 0) {
+          battleOutput.innerHTML = `<div style="text-align:center;color:red;">Kein Kampflog gefunden!</div>`;
           return;
         }
 
-        battleOutput.innerHTML = data.slice(0, 15).map(entry => {
-          const my = entry.team[0];
-          const opp = entry.opponent[0];
+        battleOutput.innerHTML = battles.slice(0, 15).map(b => {
 
-          // Ergebnis berechnen
-          const teamCrowns = my.crowns;
-          const oppCrowns = opp.crowns;
-          let resultText = "";
-          let resultColor = "";
+          const my = b.team[0];
+          const opp = b.opponent[0];
 
-          if (teamCrowns > oppCrowns) {
-            resultText = "Sieg";
-            resultColor = "#22c55e";
-          } else if (teamCrowns < oppCrowns) {
-            resultText = "Niederlage";
-            resultColor = "#ef4444";
-          } else {
-            resultText = "Unentschieden";
-            resultColor = "#888";
-          }
+          let resultText = "Unentschieden";
+          let resultColor = "#555";
 
-          // Spielmodus
-          const mode = entry.gameMode?.name || "Modus unbekannt";
+          if (my.crowns > opp.crowns) { resultText = "Sieg"; resultColor = "green"; }
+          if (my.crowns < opp.crowns) { resultText = "Niederlage"; resultColor = "red"; }
 
-          // HTML für einen Kampf
           return `
             <div class="battle-entry">
 
-              <!-- Spielmodus oben -->
-              <h3 class="battle-header">${mode}</h3>
+              <h3 class="battle-header">${b.gameMode?.name || "Modus unbekannt"}</h3>
+              <p class="battle-result" style="color:${resultColor}">
+                ${resultText} (${my.crowns} : ${opp.crowns})
+              </p>
 
-              <!-- Ergebnis darunter -->
-              <div class="battle-result" style="color:${resultColor};">
-                ${teamCrowns} : ${oppCrowns} – ${resultText}
-              </div>
-
-              <!-- Decks -->
               <div class="battle-decks">
-                <div class="deck-column">
-                  <p class="deck-player-name"><strong>${my.name}</strong> (${my.tag})</p>
-                  <div class="deck-row">
-                    ${my.cards.map(c => `
-                      <div class="battle-card">
-                        <img src="${getCardImage(c)}">
-                        <small>Lvl ${getRealCardLevel(c)}</small>
-                      </div>
-                    `).join("")}
-                  </div>
-                </div>
-                <div class="deck-column">
-                  <p class="deck-player-name"><strong>${opp.name}</strong> (${opp.tag})</p>
-                  <div class="deck-row">
-                    ${opp.cards.map(c => `
-                      <div class="battle-card">
-                        <img src="${getCardImage(c)}">
-                        <small>Lvl ${getRealCardLevel(c)}</small>
-                      </div>
-                    `).join("")}
-                  </div>
-                </div>
-              </div>
 
-              <!-- Abstand zwischen Kämpfen -->
-              <div class="battle-spacer"></div>
+                <div class="deck-column">
+                  <p class="deck-player-name">
+                    <a href="Profile.html?tag=${encodeURIComponent('#' + my.tag.replace(/^#/, ''))}"><strong>${my.name}</strong> (${my.tag})</a>
+                  </p>
+                  <div class="deck-row">
+                    ${renderCards(my.cards, "battle-card")}
+                  </div>
+                </div>
+
+                <div class="deck-column">
+                  <p class="deck-player-name">
+                    <a href="Profile.html?tag=${encodeURIComponent('#' + opp.tag.replace(/^#/, ''))}"><strong>${opp.name}</strong> (${opp.tag})</a>
+                  </p>
+                  <div class="deck-row">
+                    ${renderCards(opp.cards, "battle-card")}
+                  </div>
+                </div>
+
+              </div>
             </div>
           `;
-        }).join("");
+
+        }).join("<div class='battle-spacer'></div>");
+
       })
-      .catch(err => battleOutput.innerHTML = `<div style='color:red;text-align:center;'>${err.message}</div>`);
+      .catch(() => battleOutput.innerHTML = "Fehler beim Laden des Kampflogs");
   }
 
-  // Initiales Laden
+
+  // Initial laden
+  initPlayerTag();
   loadPlayerAndBattlelog();
 
-  // Eingabe-Events
-  playerInput.addEventListener("change", loadPlayerAndBattlelog);
-  playerInput.addEventListener("keydown", function(e) {
-    if (e.key === "Enter") loadPlayerAndBattlelog();
+
+  // ENTER-Key Listener
+  playerInput.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      loadPlayerAndBattlelog();
+    }
   });
+
+}
+
+
+// ========================================
+// 3. LEADERBOARD-SEITE
+// ========================================
+async function loadLeaderboard() {
+    const API_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjY1NzcwMmYyLWQ5YmUtNDFmNS1iNGNkLTM5YjUyYzJjZTQwZSIsImlhdCI6MTc2MjUwODQwNywic3ViIjoiZGV2ZWxvcGVyL2Y1ZjU0M2U4LTZhMjQtNzc5Mi05ZmIyLWMyM2ZhNjkzODZiZCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI0NS43OS4yMTguNzkiLCI4NC43NC45MC4zOCJdLCJ0eXBlIjoiY2xpZW50In1dfQ.nYBRqkSupsahIdk-macnZ0oVqxDdeLunFEEUj3OVKugz5qD2vUxDYTMlztqxthCVjemlcIUwHD7MCXfXZDaA-w"; // <-- hier API Token einfügen
+    const container = document.getElementById("leaderboard");
+
+    try {
+
+        const res = await fetch(
+            `https://proxy.royaleapi.dev/v1/locations/global/pathoflegend/2025-10/rankings/players?limit=100`,
+            {
+                headers: {
+                    Authorization: `Bearer ${API_TOKEN}`
+                }
+            }
+        );
+
+        if (!res.ok) {
+            throw new Error("HTTP Fehler: " + res.status);
+        }
+
+        const data = await res.json();
+        console.log("Leaderboard Data:", data);
+
+        if (!data.items || data.items.length === 0) {
+            container.innerHTML = "Keine Daten gefunden.";
+            return;
+        }
+
+        container.innerHTML = `
+            <h2>Path of Legend – Top Spieler (Season ${seasonId})</h2>
+            <table class="leaderboard-table">
+                <tr>
+                    <th>Rang</th>
+                    <th>Name</th>
+                    <th>ELO</th>
+                    <th>Level</th>
+                    <th>Clan</th>
+                    <th>Profil</th>
+                </tr>
+                ${data.items.map(p => `
+                    <tr>
+                        <td>${p.rank}</td>
+                        <td>${p.name}</td>
+                        <td>${p.eloRating}</td>
+                        <td>${p.expLevel}</td>
+                        <td>${p.clan ? p.clan.name : "-"}</td>
+                        <td>
+                            <a href="Profile.html?tag=${encodeURIComponent(p.tag.replace('#', ''))}">
+                                Öffnen
+                            </a>
+                        </td>
+                    </tr>
+                `).join("")}
+            </table>
+        `;
+
+    } catch (err) {
+        console.error("Leaderboard konnte nicht geladen werden:", err);
+        container.innerHTML = "Fehler beim Laden der Daten.";
+    }
+}
+
+if (window.location.pathname.endsWith("leaderboard.html")) {
+    document.addEventListener("DOMContentLoaded", loadLeaderboard);
 }
