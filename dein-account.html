@@ -9,7 +9,7 @@
   </head>
 
   <body>
-  <nav>
+     <nav>
       <div class="nav-container">
         <a href="index.html" id="site-title">ClashStats</a>
       <div class="nav-right">
@@ -18,14 +18,30 @@
           <button type="submit" style="display:none">Suchen</button>
         </form>
       <div class="nav-links">
-        <a href="dein-account.html">Dein Account</a>
-        <a href="karten.html" class="active">Karten</a>
+        <a href="dein-account.html" class="active">Dein Account</a>
+        <a href="karten.html">Karten</a>
         <a href="leaderboard.html">Rangliste</a>
         <a href="clan.html">Clan</a>
       </div>
       </div>
       </div>
+     </nav>
 
-  </nav>
+
+     <div id="idPrompt" style="display:none;">
+        <h2>Spieler-ID eingeben</h2>
+        <input type="text" id="inputTag" placeholder="#ABCDEFG">
+        <button id="saveTagBtn">Speichern</button>
+     </div>
+
+
+     <div id="accountInfo" style="display:none;">
+        <h2>Dein gespeicherter Account</h2>
+        <div id="profileData"></div>
+        <br>
+        <button id="changeTagBtn">ID ändern</button>
+     </div>
+
+     <script src="script.js"></script>
   </body>
 </html>

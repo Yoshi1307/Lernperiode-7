@@ -50,9 +50,8 @@ nav {
 .home {
   margin-top: 150px;
   padding: 2rem;
-  text-align  : center;
+  text-align: center;
 }
-
 
 #playerTag {
   padding: 8px 10px;
@@ -128,11 +127,12 @@ select {
 /* =============================
    PROFIL
 ============================= */
+
 .profile-box {
   max-width: 900px;
   margin: 140px auto 30px auto;
   padding: 25px;
-    background: white;
+  background: white;
   border-radius: 12px;
   box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
@@ -174,6 +174,7 @@ select {
 /* =============================
    BATTLELOG
 ============================= */
+
 .battle-entry {
   max-width: 900px;
   margin: 20px auto;
@@ -215,15 +216,15 @@ select {
   margin-bottom: 8px;
 }
 
-.deck-player-name a{
+.deck-player-name a {
   color: black;
   text-decoration: none;
 }
 
 .deck-row {
   display: grid;
- grid-template-columns: repeat(4, 85px);
- justify-content: center;
+  grid-template-columns: repeat(4, 85px);
+  justify-content: center;
   gap: 8px;
 }
 
@@ -251,24 +252,244 @@ select {
 }
 
 /* =============================
-   RESPONSIVE
+   LEADERBOARD
 ============================= */
-@media (max-width: 700px) {
-  .profile-box,
-  .battle-entry {
-    margin-left: 15px;
-    margin-right: 15px;
-  }
 
-  .deck-row {
-    justify-content: center;
-  }
+.SeasonSelecter {
+  margin-top: 120px;
+  justify-content: center;
+}
 
-  .deck-card, .battle-card {
-    width: 50px;
-  }
+#leaderboard {
+  max-width: 1000px;
+  margin: 140px auto 50px auto;
+  padding: 0 20px;
+}
 
-  .deck-card img, .battle-card img {
-    width: 50px;
-  }
+#leaderboard h2 {
+  text-align: center;
+  color: #1e293b;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: white;
+}
+
+.leaderboard-table th {
+  background-color: #047857;
+  color: white;
+  padding: 15px 10px;
+  text-align: left;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.leaderboard-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #475569;
+}
+
+.leaderboard-table tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+.leaderboard-table tr:hover {
+  background-color: #e0f2f1;
+  cursor: default;
+}
+
+.leaderboard-table tr td:first-child {
+  font-weight: bold;
+  text-align: center;
+  width: 60px;
+  color: #1e293b;
+}
+
+.leaderboard-table tr td:nth-child(2) {
+  font-weight: 500;
+  color: #222;
+}
+
+.leaderboard-table tr td:nth-child(3) {
+  font-weight: bold;
+  color: #dc2626;
+  width: 80px;
+  text-align: right;
+}
+
+.leaderboard-table tr td:nth-child(4) {
+  color: #475569;
+}
+
+.leaderboard-table tr td:last-child a {
+  color: #047857;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 5px 8px;
+  border: 1px solid #047857;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+  display: inline-block;
+}
+
+.leaderboard-table tr td:last-child a:hover {
+  background-color: #047857;
+  color: white;
+}
+
+.main-content-container {
+  padding-top: 120px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.main-content-container h2 {
+  text-align: center;
+  color: #1e293b;
+  margin-bottom: 20px;
+}
+
+/* =============================
+   ACCOUNT – ID Prompt & Profilanzeige
+============================= */
+
+#idPrompt {
+  max-width: 500px;
+  margin: 150px auto 0 auto;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+#inputTag {
+  width: 80%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 2px solid #047857;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+#saveTagBtn,
+#changeTagBtn {
+  background: #047857;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 10px;
+}
+
+#saveTagBtn:hover,
+#changeTagBtn:hover {
+  background: #065f46;
+}
+
+#accountInfo {
+  max-width: 900px;
+  margin: 150px auto 40px auto;
+  padding: 25px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+#accountInfo h2,
+#accountInfo h3 {
+  color: #1e293b;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+#accountInfo h2 {
+  text-align: center;
+}
+
+/* =============================
+   Badges + Masteries
+============================= */
+
+.badge-grid,
+.mastery-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.badge-item,
+.mastery-item {
+  background: #f8fafc;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  width: 90px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  transition: transform 0.15s;
+}
+
+.badge-item:hover,
+.mastery-item:hover {
+  transform: translateY(-4px);
+}
+
+.badge-item img,
+.mastery-item img {
+  width: 60px;
+  height: auto;
+}
+
+/* =============================
+   Kartenübersicht
+============================= */
+
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.card-box {
+  width: 110px;
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform 0.15s;
+}
+
+.card-box:hover {
+  transform: translateY(-4px);
+}
+
+.card-box img {
+  width: 85px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.card-box div {
+  font-size: 14px;
+  margin-top: 3px;
+  color: #1e293b;
 }
