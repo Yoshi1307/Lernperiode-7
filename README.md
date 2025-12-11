@@ -60,5 +60,12 @@ Heute habe ich als erstes Versucht den Code etwas zu vereinfachen/kürez was bis
 12.12
 
 - [ ] Leaderboard auf die Aktuelle Season Updaten
-- [ ] CSS Code dafür schreiben
-- [ ] Möglichkeit sich mit seinem Profil anmelden zu können, um bei dein Account sein eigenes Profil angezeigen zu lassen.
+- [x] CSS Code dafür schreiben
+- [x] Möglichkeit sich mit seinem Profil anmelden zu können, um bei dein Account sein eigenes Profil angezeigen zu lassen.
+
+Zuerst habe ich heute wieder versucht, im Leaderboard die neueste Season hinzuzufügen. Nach etwas Zeit habe ich herausgefunden, dass das gar nicht geht. Ich habe eine Dropdown-Liste hinzugefügt, um anzeigen zu können, von welcher Season man die Rangliste sehen will. Anschliessend habe ich ein CSS dazu geschrieben. Zum Schluss habe ich die Funktion hinzugefügt, sich sein eigenes Profil unter „dein Account“ anzusehen. Es ist ähnlich mit der normalen Profilansicht, aber man bekommt nochmal etwas mehr Infos.
+
+19.12
+- [ ] Die Sachen die bei dein Account angezeigt anpassen, dass alles witchtig ist und schön formatiert
+- [ ] Unter Clan Clans anzeigen können und die Mitglieder auflisten können
+- [ ] Startseite etwas gestalten dass sie nicht so leer ist
