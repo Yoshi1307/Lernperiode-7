@@ -66,6 +66,17 @@ Heute habe ich als erstes Versucht den Code etwas zu vereinfachen/kürez was bis
 Zuerst habe ich heute wieder versucht, im Leaderboard die neueste Season hinzuzufügen. Nach etwas Zeit habe ich herausgefunden, dass das gar nicht geht. Ich habe eine Dropdown-Liste hinzugefügt, um anzeigen zu können, von welcher Season man die Rangliste sehen will. Anschliessend habe ich ein CSS dazu geschrieben. Zum Schluss habe ich die Funktion hinzugefügt, sich sein eigenes Profil unter „dein Account“ anzusehen. Es ist ähnlich mit der normalen Profilansicht, aber man bekommt nochmal etwas mehr Infos.
 
 19.12
-- [ ] Die Sachen die bei dein Account angezeigt anpassen, dass alles witchtig ist und schön formatiert
-- [ ] Unter Clan Clans anzeigen können und die Mitglieder auflisten können
-- [ ] Startseite etwas gestalten dass sie nicht so leer ist
+- [x] Die Sachen die bei dein Account angezeigt anpassen, dass alles wichtig ist und schön formatiert
+- [x] Unter Clan Clans anzeigen können und die Mitglieder auflisten können
+- [x] Startseite etwas gestalten dass sie nicht so leer ist
+
+Heute habe ich die letzten Änderungen an meinem Projekt vorgenommen. Jetzt werden im eigenen Profil alle wichtigen Infos (Deck, Kartenlevel, Masterys, etc.) angezeigt. Man kann die Karten auch nach Level sortieren. Als Nächstes habe ich den letzten fehlenden Teil der Seite hinzugefügt, die Clan-Seite. Hier kann man nach Clans via Name oder ID suchen. Während der Eingabe werden schon Clans vorgeschlagen, damit man es einfacher hat, sie zu suchen. Wenn man auf einen Clan klickt, werden einem die Mitglieder angezeigt und die Anzahl Trophäen, die jeder hat. Man kann auch auf die Namen draufdrücken und wird zu ihrem Profil geleitet. Überall, wo der Clan angezeigt wird, kann man jetzt auch auf den Namen/ID klicken und wird zur Clan-Seite weitergeleitet. Als Letztes habe ich noch die Startseite etwas verschönert und ein Hintergrundbild hinzugefügt.
+
+## Fertiges Projekt
+Mein fertiges Projekt ist eine Webseite, auf der man jegliche Sachen zum Spiel Clash Royale ansehen kann. Man kann die letzten Kämpfe jedes Spielers ansehen, oder Clans und Spielerprofile besichtigen. Es gibt auch die Möglichkeit, die Ranglisten der letzten 2 Jahre anzusehen. Auch ist es möglich, alle Karten im Spiel anzeigen zu lassen.
+<img width="1353" height="556" alt="Screenshot 2025-12-19 112531" src="https://github.com/user-attachments/assets/c0c12f32-edfb-4764-9645-cd85370cd883" />
+
+## Reflexion
+Diese Lernperiode hat mir sehr gefallen, da ich gelernt habe, wie man Webseiten mit APIs verbinden kann und so seine Webseite mit echten Daten verbinden kann. Auch wenn ich am Anfang Probleme hatte mit dem Finden einer guten API und meine Idee wechseln musste, bin ich mit dem Endergebnis trotzdem sehr zufrieden. Durch diese Lernperiode konnte ich auch etwas besser JavaScript lernen und mein Wissen zu CSS und HTML auffrischen.
+
+
