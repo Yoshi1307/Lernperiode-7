@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MatchVision</title>
+    <title>Dein Account - ClashStats</title>
 
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -38,6 +38,15 @@
      <div id="accountInfo" style="display:none;">
         <h2>Dein gespeicherter Account</h2>
         <div id="profileData"></div>
+
+      <div id="cardSortBar" style="margin:15px 0; display:none;">
+          <label for="sortSelect">Sortieren nach: </label>
+            <select id="sortSelect">
+              <option value="level">Level</option>
+              <option value="elixir">Elixier</option>
+            </select>
+      </div>
+
         <br>
         <button id="changeTagBtn">ID ändern</button>
      </div>

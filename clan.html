@@ -1,32 +1,59 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MatchVision</title>
-
+    <title>Clan - ClashStats</title>
     <link rel="stylesheet" href="style.css" />
-  </head>
+</head>
+<body>
 
-  <body>
-
-  <nav>
-      <div class="nav-container">
+<nav>
+    <div class="nav-container">
         <a href="index.html" id="site-title">ClashStats</a>
-      <div class="nav-right">
-        <form action="Profile.html" method="get" class="search-form">
-          <input type="text" id="playerTag" name="tag" placeholder="SpielerID eingeben">
-          <button type="submit" style="display:none">Suchen</button>
-        </form>
-      <div class="nav-links">
-        <a href="dein-account.html">Dein Account</a>
-        <a href="karten.html" class="active">Karten</a>
-        <a href="leaderboard.html">Rangliste</a>
-        <a href="clan.html">Clan</a>
-      </div>
-      </div>
-      </div>
+        <div class="nav-right">
+            <form action="Profile.html" method="get" class="search-form">
+                <input type="text" id="playerTag" name="tag" placeholder="SpielerID eingeben">
+                <button type="submit" style="display:none">Suchen</button>
+            </form>
+            <div class="nav-links">
+                <a href="dein-account.html">Dein Account</a>
+                <a href="karten.html">Karten</a>
+                <a href="leaderboard.html">Rangliste</a>
+                <a href="clan.html" class="active">Clan</a>
+            </div>
+        </div>
+    </div>
+</nav>
 
-  </nav>
-  </body>
+<main class="main-content-container">
+    <div id="clanSearchSection">
+        <h2 style="text-align: center; margin-top: 40px;">Clan Suche</h2>
+        <div class="search-box">
+            <input type="text" id="clanSearchInput" placeholder="Clan Name oder #ID eingeben..." autocomplete="off">
+            <div id="clanSuggestions" class="suggestions-list"></div>
+        </div>
+    </div>
+
+    <div id="clanDetailView" style="display:none;">
+        <div class="profile-box">
+            <div id="clanHeader"></div>
+            <br>
+            <h3>Mitglieder</h3>
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>Rang</th>
+                        <th>Name</th>
+                        <th>Trophäen</th>
+                    </tr>
+                </thead>
+                <tbody id="memberList"></tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<script src="script.js"></script>
+</body>
 </html>
