@@ -1,6 +1,24 @@
 Lern-Periode 7
 24.10. bis 19.12.2025
 
+## Projektbeschreibung
+
+Bei diesem Projekt handelt es sich um eine Webapplikation, die mit der Clash Royale API verbunden ist. Über die Spieler-ID kann nach einem Account gesucht werden. Dabei werden verschiedene Informationen wie Trophäen, das aktuelle Deck und der Kampflog der letzten 10 Matches angezeigt.
+
+Spieler können ihren Account speichern und dadurch zusätzliche Informationen wie Kartenlevel und Siege einsehen. Zusätzlich bietet die Webapplikation eine Übersicht über alle aktuell verfügbaren Karten.
+
+Über die Rangliste können die Spieler-Ranglisten verschiedener Saisons eingesehen und einzelne Spielerprofile aufgerufen werden. Im Bereich Clan kann nach einem Clan gesucht werden, wobei auch dessen Mitglieder und deren Profile angezeigt werden.
+
+Im Video wird alles noch einmal veranschaulicht:
+
+https://github.com/user-attachments/assets/9b994243-c21a-4abc-b3c5-f9f096862f28
+
+
+
+
+
+
+
 Grob-Planung
 Für welche API möchten Sie ein eigenes front end erstellen? Football API
 Welche groben Funktionalitäten soll Ihr front end zur Verfügung stellen? Man kann die Tabellen von den verschiedenen Ligen anzeigen können
