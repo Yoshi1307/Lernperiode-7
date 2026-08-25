@@ -14,18 +14,19 @@ function getRealCardLevel(card) {
 
   return (
     base +
-    (max === 14
-      ? 2
-      : max === 11
-      ? 5
-      : max === 8
-      ? 8
-      : max === 6
-      ? 10
-      : 0)
+    (max === 14 ? 2 : max === 11 ? 5 : max === 8 ? 8 : max === 6 ? 10 : 0)
   );
 }
 
+const RARITY_ORDER = {
+  common: 0,
+  rare: 1,
+  epic: 2,
+  legendary: 3,
+  champion: 4, // API nennt "Hero"-Karten "Champion" – siehe Hinweis unten
+};
+
+const getRarityRank = (card) => RARITY_ORDER[card.rarity?.toLowerCase()] ?? 99;
 const getCardImage = (c) =>
   c.evolutionLevel > 0 && c.evolutionIconUrls
     ? c.evolutionIconUrls.medium
@@ -39,7 +40,7 @@ const renderCards = (cards, cls) =>
             <img src="${getCardImage(c)}">
             <small>Lvl ${getRealCardLevel(c)}</small>
         </div>
-    `
+    `,
     )
     .join("");
 
@@ -74,7 +75,7 @@ if (cardsContainer) {
             <p>Seltenheit: ${card.rarity}</p>
             <p>Elixier: ${card.elixirCost ?? "?"}</p>
         </div>
-    `
+    `,
       )
       .join("");
   }
@@ -86,6 +87,7 @@ if (cardsContainer) {
     const sorts = {
       elixirAsc: (a, b) => (a.elixirCost ?? 0) - (b.elixirCost ?? 0),
       elixirDesc: (a, b) => (b.elixirCost ?? 0) - (a.elixirCost ?? 0),
+      rarity: (a, b) => getRarityRank(a) - getRarityRank(b), // neu
     };
 
     if (sorts[v]) sorted.sort(sorts[v]);
@@ -144,7 +146,7 @@ if (playerOutput && battleOutput && playerInput) {
     fetch(playerURL, apiHeaders)
       .then((r) => (r.ok ? r.json() : Promise.reject()))
       .then((data) => {
-    playerOutput.innerHTML = `
+        playerOutput.innerHTML = `
         <div class="profile-box">
             <h2>${data.name} <span style="color:#888">(${data.tag})</span></h2>
             
@@ -153,8 +155,9 @@ if (playerOutput && battleOutput && playerInput) {
                 <p><strong>Höchste Trophäen:</strong> ${data.bestTrophies}</p>
                 <p><strong>Level:</strong> ${data.expLevel}</p>
                 <p><strong>Clan:</strong> 
-                    ${data.clan 
-                        ? `<a href="clan.html?tag=${encodeURIComponent(data.clan.tag)}" class="clan-link">${data.clan.name}</a>` 
+                    ${
+                      data.clan
+                        ? `<a href="clan.html?tag=${encodeURIComponent(data.clan.tag)}" class="clan-link">${data.clan.name}</a>`
                         : "Kein Clan"
                     }
                 </p>
@@ -164,7 +167,7 @@ if (playerOutput && battleOutput && playerInput) {
             <div class="player-deck">${renderCards(data.currentDeck, "deck-card")}</div>
         </div>
     `;
-})
+      })
       .catch(() => (playerOutput.innerHTML = "Fehler beim Laden des Profils"));
 
     fetch(battleURL, apiHeaders)
@@ -187,8 +190,8 @@ if (playerOutput && battleOutput && playerInput) {
               my.crowns > opp.crowns
                 ? { text: "Sieg", color: "green" }
                 : my.crowns < opp.crowns
-                ? { text: "Niederlage", color: "red" }
-                : { text: "Unentschieden", color: "#555" };
+                  ? { text: "Niederlage", color: "red" }
+                  : { text: "Unentschieden", color: "#555" };
 
             return `
                 <div class="battle-entry">
@@ -203,28 +206,28 @@ if (playerOutput && battleOutput && playerInput) {
                         <div class="deck-column">
                             <p class="deck-player-name">
                                 <a href="Profile.html?tag=${encodeURIComponent(
-                                  "#" + my.tag.replace("#", "")
+                                  "#" + my.tag.replace("#", ""),
                                 )}">
                                     <strong>${my.name}</strong> (${my.tag})
                                 </a>
                             </p>
                             <div class="deck-row">${renderCards(
                               my.cards,
-                              "battle-card"
+                              "battle-card",
                             )}</div>
                         </div>
 
                         <div class="deck-column">
                             <p class="deck-player-name">
                                 <a href="Profile.html?tag=${encodeURIComponent(
-                                  "#" + opp.tag.replace("#", "")
+                                  "#" + opp.tag.replace("#", ""),
                                 )}">
                                     <strong>${opp.name}</strong> (${opp.tag})
                                 </a>
                             </p>
                             <div class="deck-row">${renderCards(
                               opp.cards,
-                              "battle-card"
+                              "battle-card",
                             )}</div>
                         </div>
 
@@ -235,7 +238,7 @@ if (playerOutput && battleOutput && playerInput) {
           .join(`<div class="battle-spacer"></div>`);
       })
       .catch(
-        () => (battleOutput.innerHTML = "Fehler beim Laden des Kampflogs")
+        () => (battleOutput.innerHTML = "Fehler beim Laden des Kampflogs"),
       );
   }
 
@@ -262,7 +265,7 @@ async function loadLeaderboard() {
   try {
     const res = await fetch(
       `https://proxy.royaleapi.dev/v1/locations/global/pathoflegend/${seasonId}/rankings/players?limit=100`,
-      apiHeaders
+      apiHeaders,
     );
 
     if (!res.ok) throw new Error();
@@ -290,10 +293,10 @@ async function loadLeaderboard() {
                     <td>${p.eloRating}</td>
                     <td>${p.clan?.name || "-"}</td>
                     <td><a href="Profile.html?tag=${cleanTag(
-                      p.tag
+                      p.tag,
                     )}">Öffnen</a></td>
                 </tr>
-                `
+                `,
               )
               .join("")}
         </table>
@@ -303,7 +306,9 @@ async function loadLeaderboard() {
   }
 }
 
-document.getElementById("seasonSelect")?.addEventListener("change", loadLeaderboard);
+document
+  .getElementById("seasonSelect")
+  ?.addEventListener("change", loadLeaderboard);
 
 if (location.pathname.endsWith("leaderboard.html")) {
   document.addEventListener("DOMContentLoaded", loadLeaderboard);
@@ -311,69 +316,73 @@ if (location.pathname.endsWith("leaderboard.html")) {
 // ====================================================
 // 4. DEIN ACCOUNT
 // ====================================================
-let accountCards = []; 
+let accountCards = [];
 
 document.addEventListener("DOMContentLoaded", () => {
-    const savedTag = localStorage.getItem("myPlayerTag");
-    if (savedTag) {
-        const accInfo = document.getElementById("accountInfo");
-        if (accInfo) accInfo.style.display = "block";
-        loadAccount(savedTag);
-    } else {
-        const idPrompt = document.getElementById("idPrompt");
-        if (idPrompt) idPrompt.style.display = "block";
-    }
+  const savedTag = localStorage.getItem("myPlayerTag");
+  if (savedTag) {
+    const accInfo = document.getElementById("accountInfo");
+    if (accInfo) accInfo.style.display = "block";
+    loadAccount(savedTag);
+  } else {
+    const idPrompt = document.getElementById("idPrompt");
+    if (idPrompt) idPrompt.style.display = "block";
+  }
 });
 
 document.getElementById("sortSelect")?.addEventListener("change", (e) => {
-    if (accountCards.length === 0) return;
+  if (accountCards.length === 0) return;
 
-    let sorted = [...accountCards];
-    const v = e.target.value;
+  let sorted = [...accountCards];
+  const v = e.target.value;
 
-    const sorts = {
-        level: (a, b) => getRealCardLevel(b) - getRealCardLevel(a),
-        elixir: (a, b) => (a.elixirCost ?? 0) - (b.elixirCost ?? 0),
-    };
+  const sorts = {
+    level: (a, b) => getRealCardLevel(b) - getRealCardLevel(a),
+    elixir: (a, b) => (a.elixirCost ?? 0) - (b.elixirCost ?? 0),
+    rarity: (a, b) => getRarityRank(a) - getRarityRank(b),
+  };
 
-    if (sorts[v]) sorted.sort(sorts[v]);
-    displayAccountCards(sorted); 
+  if (sorts[v]) sorted.sort(sorts[v]);
+  displayAccountCards(sorted);
 });
 
 document.getElementById("saveTagBtn")?.addEventListener("click", () => {
-    const input = document.getElementById("inputTag").value.trim();
-    if (input.length < 3) {
-        alert("Bitte gültige Spieler-ID eingeben!");
-        return;
-    }
-    const tag = input.replace("#", "");
-    localStorage.setItem("myPlayerTag", tag);
-    document.getElementById("idPrompt").style.display = "none";
-    document.getElementById("accountInfo").style.display = "block";
-    loadAccount(tag);
+  const input = document.getElementById("inputTag").value.trim();
+  if (input.length < 3) {
+    alert("Bitte gültige Spieler-ID eingeben!");
+    return;
+  }
+  const tag = input.replace("#", "");
+  localStorage.setItem("myPlayerTag", tag);
+  document.getElementById("idPrompt").style.display = "none";
+  document.getElementById("accountInfo").style.display = "block";
+  loadAccount(tag);
 });
 
 document.getElementById("changeTagBtn")?.addEventListener("click", () => {
-    localStorage.removeItem("myPlayerTag");
-    document.getElementById("accountInfo").style.display = "none";
-    document.getElementById("idPrompt").style.display = "block";
-});async function loadAccount(tag) {
-    const output = document.getElementById("profileData");
-    if (!output) return;
-    output.innerHTML = "Lade…";
+  localStorage.removeItem("myPlayerTag");
+  document.getElementById("accountInfo").style.display = "none";
+  document.getElementById("idPrompt").style.display = "block";
+});
+async function loadAccount(tag) {
+  const output = document.getElementById("profileData");
+  if (!output) return;
+  output.innerHTML = "Lade…";
 
-    try {
-        const res = await fetch(
-            `https://proxy.royaleapi.dev/v1/players/%23${tag}`,
-            apiHeaders
-        );
-        if (!res.ok) throw new Error("API Fehler");
-        const data = await res.json();
-        
-        let rawCards = data.cards || [];
-        accountCards = rawCards.sort((a, b) => getRealCardLevel(b) - getRealCardLevel(a));
+  try {
+    const res = await fetch(
+      `https://proxy.royaleapi.dev/v1/players/%23${tag}`,
+      apiHeaders,
+    );
+    if (!res.ok) throw new Error("API Fehler");
+    const data = await res.json();
 
-        let html = `
+    let rawCards = data.cards || [];
+    accountCards = rawCards.sort(
+      (a, b) => getRealCardLevel(b) - getRealCardLevel(a),
+    );
+
+    let html = `
             <h2>${data.name} <small>(${data.tag})</small></h2>
             <p><strong>Level:</strong> ${data.expLevel}</p>
             <p><strong>Trophäen:</strong> ${data.trophies}</p>
@@ -385,10 +394,11 @@ document.getElementById("changeTagBtn")?.addEventListener("click", () => {
             <br>
             <h3>Clan</h3>
             <p>
-                ${data.clan 
+                ${
+                  data.clan
                     ? `<a href="clan.html?tag=${encodeURIComponent(data.clan.tag)}" class="clan-link">
                           ${data.clan.name} (${data.clan.tag})
-                       </a>` 
+                       </a>`
                     : "Kein Clan"
                 }
             </p>
@@ -407,66 +417,67 @@ document.getElementById("changeTagBtn")?.addEventListener("click", () => {
             <br>
         `;
 
-        if (data.badges && data.badges.length > 0) {
-            const sortedBadges = [...data.badges].sort((a, b) => (b.level ?? 0) - (a.level ?? 0));
+    if (data.badges && data.badges.length > 0) {
+      const sortedBadges = [...data.badges].sort(
+        (a, b) => (b.level ?? 0) - (a.level ?? 0),
+      );
 
-            html += `<h3>Abzeichen</h3><div class="badge-container">`;
-            sortedBadges.forEach(badge => {
-                html += `
+      html += `<h3>Abzeichen</h3><div class="badge-container">`;
+      sortedBadges.forEach((badge) => {
+        html += `
                     <div class="badge-wrapper">
                         <img src="${badge.iconUrls.large}" title="${badge.name}">
                         <div class="badge-level">Lvl ${badge.level ?? 1}</div>
                     </div>
                 `;
-            });
-            html += `</div>`;
-        }
-
-        html += `<div id="cardsContainer"></div>`;
-        output.innerHTML = html;
-
-        if (accountCards.length > 0) {
-            displayAccountCards(accountCards);
-        }
-
-    } catch (err) {
-        output.innerHTML = `<p style="color:red;">Fehler beim Laden.</p>`;
-        console.error(err);
+      });
+      html += `</div>`;
     }
+
+    html += `<div id="cardsContainer"></div>`;
+    output.innerHTML = html;
+
+    if (accountCards.length > 0) {
+      displayAccountCards(accountCards);
+    }
+  } catch (err) {
+    output.innerHTML = `<p style="color:red;">Fehler beim Laden.</p>`;
+    console.error(err);
+  }
 }
 
 function displayAccountCards(cards) {
-    const container = document.getElementById("cardsContainer");
-    if (!container) return;
+  const container = document.getElementById("cardsContainer");
+  if (!container) return;
 
-    const sortBar = document.getElementById("cardSortBar");
-    
-    let html = `
+  const sortBar = document.getElementById("cardSortBar");
+
+  let html = `
         <div class="account-cards-header">
             <h3>Karten (${cards.length})</h3>
             <div id="sortPlacement"></div>
         </div>
         <div class="account-cards-grid">`;
 
-    cards.forEach(card => {
-        html += `
+  cards.forEach((card) => {
+    html += `
             <div class="account-card-item">
                 <img src="${getCardImage(card)}">
                 <div>${card.name}</div>
                 <div>Lvl ${getRealCardLevel(card)}</div>
             </div>
         `;
-    });
+  });
 
-    html += `</div>`;
-    container.innerHTML = html;
+  html += `</div>`;
+  container.innerHTML = html;
 
-    const placement = document.getElementById("sortPlacement");
-    if (placement && sortBar) {
-        placement.appendChild(sortBar);
-        sortBar.style.display = "block";
-        sortBar.style.margin = "0";
-    }
+  const placement = document.getElementById("sortPlacement");
+  if (placement && sortBar) {
+    placement.appendChild(sortBar);
+    sortBar.style.display = "block";
+    sortBar.style.margin = "0";
+  }
 }
 
 // ====================================================
@@ -476,43 +487,49 @@ function displayAccountCards(cards) {
 let clanDebounceTimer;
 
 document.getElementById("clanSearchInput")?.addEventListener("input", (e) => {
-    clearTimeout(clanDebounceTimer);
-    const query = e.target.value.trim();
-    
-    if (query.length < 3) {
-        document.getElementById("clanSuggestions").innerHTML = "";
-        return;
-    }
+  clearTimeout(clanDebounceTimer);
+  const query = e.target.value.trim();
 
-    clanDebounceTimer = setTimeout(() => {
-        searchClans(query);
-    }, 400); 
+  if (query.length < 3) {
+    document.getElementById("clanSuggestions").innerHTML = "";
+    return;
+  }
+
+  clanDebounceTimer = setTimeout(() => {
+    searchClans(query);
+  }, 400);
 });
 
 async function searchClans(query) {
-    if (query.startsWith("#")) {
-        const cleanTag = query.replace("#", "%23");
-        loadClanDetails(cleanTag);
-        return;
-    }
+  if (query.startsWith("#")) {
+    const cleanTag = query.replace("#", "%23");
+    loadClanDetails(cleanTag);
+    return;
+  }
 
-    try {
-        const res = await fetch(`https://proxy.royaleapi.dev/v1/clans?name=${encodeURIComponent(query)}&limit=6`, apiHeaders);
-        const data = await res.json();
-        displayClanSuggestions(data.items);
-    } catch (err) {
-        console.error("Clan Suche Fehler:", err);
-    }
+  try {
+    const res = await fetch(
+      `https://proxy.royaleapi.dev/v1/clans?name=${encodeURIComponent(query)}&limit=6`,
+      apiHeaders,
+    );
+    const data = await res.json();
+    displayClanSuggestions(data.items);
+  } catch (err) {
+    console.error("Clan Suche Fehler:", err);
+  }
 }
 
 function displayClanSuggestions(clans) {
-    const container = document.getElementById("clanSuggestions");
-    if (!clans || clans.length === 0) {
-        container.innerHTML = '<div class="suggestion-item">Keine Clans gefunden</div>';
-        return;
-    }
+  const container = document.getElementById("clanSuggestions");
+  if (!clans || clans.length === 0) {
+    container.innerHTML =
+      '<div class="suggestion-item">Keine Clans gefunden</div>';
+    return;
+  }
 
-    container.innerHTML = clans.map(clan => `
+  container.innerHTML = clans
+    .map(
+      (clan) => `
         <div class="suggestion-item" onclick="loadClanDetails('${clan.tag.replace("#", "%23")}')">
             <img src="https://cdn.royaleapi.com/static/img/badge/${clan.badgeId}.png">
             <div>
@@ -520,18 +537,23 @@ function displayClanSuggestions(clans) {
                 <small>${clan.members}/50 Mitgl. •  ${clan.clanScore} •  ${clan.clanWarTrophies}</small>
             </div>
         </div>
-    `).join("");
+    `,
+    )
+    .join("");
 }
 
 async function loadClanDetails(apiTag) {
-    document.getElementById("clanSuggestions").innerHTML = "";
-    document.getElementById("clanSearchInput").value = "";
+  document.getElementById("clanSuggestions").innerHTML = "";
+  document.getElementById("clanSearchInput").value = "";
 
-    try {
-        const res = await fetch(`https://proxy.royaleapi.dev/v1/clans/${apiTag}`, apiHeaders);
-        const clan = await res.json();
+  try {
+    const res = await fetch(
+      `https://proxy.royaleapi.dev/v1/clans/${apiTag}`,
+      apiHeaders,
+    );
+    const clan = await res.json();
 
-        document.getElementById("clanHeader").innerHTML = `
+    document.getElementById("clanHeader").innerHTML = `
             <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
                 <img src="https://cdn.royaleapi.com/static/img/badge/${clan.badgeId}.png" width="100">
                 <div style="flex:1; min-width:200px;">
@@ -543,23 +565,26 @@ async function loadClanDetails(apiTag) {
             </div>
         `;
 
-        const sortedMembers = clan.memberList.sort((a, b) => b.trophies - a.trophies);
+    const sortedMembers = clan.memberList.sort(
+      (a, b) => b.trophies - a.trophies,
+    );
 
-
-        document.getElementById("memberList").innerHTML = sortedMembers.map((member, index) => `
+    document.getElementById("memberList").innerHTML = sortedMembers
+      .map(
+        (member, index) => `
             <tr>
                 <td>${index + 1}</td>
                 <td><a href="Profile.html?tag=${encodeURIComponent(member.tag)}" style="color:#047857; font-weight:bold; text-decoration:none;">${member.name}</a></td>
                 <td> ${member.trophies}</td>
             </tr>
-        `).join("");
+        `,
+      )
+      .join("");
 
-
-        document.getElementById("clanDetailView").style.display = "block";
-        window.scrollTo({ top: 200, behavior: 'smooth' });
-
-    } catch (err) {
-        console.error("Clandetails Fehler:", err);
-        alert("Clan konnte nicht geladen werden.");
-    }
+    document.getElementById("clanDetailView").style.display = "block";
+    window.scrollTo({ top: 200, behavior: "smooth" });
+  } catch (err) {
+    console.error("Clandetails Fehler:", err);
+    alert("Clan konnte nicht geladen werden.");
+  }
 }

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
@@ -11,68 +11,77 @@
     <nav>
       <div class="nav-container">
         <a href="index.html" id="site-title">ClashStats</a>
-      <div class="nav-right">
-        <form action="Profile.html" method="get" class="search-form">
-          <input type="text" id="playerTag" name="tag" placeholder="SpielerID eingeben">
-          <button type="submit" style="display:none">Suchen</button>
-        </form>
-      <div class="nav-links">
-        <a href="dein-account.html">Dein Account</a>
-        <a href="karten.html" class="active">Karten</a>
-        <a href="leaderboard.html">Rangliste</a>
-        <a href="clan.html">Clan</a>
+        <div class="nav-right">
+          <form action="Profile.html" method="get" class="search-form">
+            <input
+              type="text"
+              id="playerTag"
+              name="tag"
+              placeholder="SpielerID eingeben"
+            />
+            <button type="submit" style="display: none">Suchen</button>
+          </form>
+          <div class="nav-links">
+            <a href="dein-account.html">Dein Account</a>
+            <a href="karten.html" class="active">Karten</a>
+            <a href="leaderboard.html">Rangliste</a>
+            <a href="clan.html">Clan</a>
+          </div>
+        </div>
       </div>
-      </div>
-      </div>
-  </nav>
+    </nav>
 
+    <div class="SeasonSelecter">
+      <label for="seasonSelect">Season auswählen:</label>
+      <select id="seasonSelect">
+        <option value="2026-08">Season 2026-02</option>
+        <option value="2026-07">Season 2026-01</option>
+        <option value="2026-06">Season 2025-12</option>
+        <option value="2026-05">Season 2025-11</option>
+        <option value="2026-04">Season 2025-10</option>
+        <option value="2026-03">Season 2025-09</option>
+        <option value="2026-02">Season 2025-08</option>
+        <option value="2026-01">Season 2026-01</option>
+        <option value="2025-12">Season 2025-12</option>
+        <option value="2025-11">Season 2025-11</option>
+        <option value="2025-10">Season 2025-10</option>
+        <option value="2025-09">Season 2025-09</option>
+        <option value="2025-08">Season 2025-08</option>
+        <option value="2025-07">Season 2025-07</option>
+        <option value="2025-06">Season 2025-06</option>
+        <option value="2025-05">Season 2025-05</option>
+        <option value="2025-04">Season 2025-04</option>
+        <option value="2025-03">Season 2025-03</option>
+        <option value="2025-02">Season 2025-02</option>
+        <option value="2025-01">Season 2025-01</option>
+        <option value="2024-12">Season 2024-12</option>
+        <option value="2024-11">Season 2024-11</option>
+        <option value="2024-10">Season 2024-10</option>
+        <option value="2024-09">Season 2024-09</option>
+        <option value="2024-08">Season 2024-08</option>
+        <option value="2024-07">Season 2024-07</option>
+        <option value="2024-06">Season 2024-06</option>
+        <option value="2024-05">Season 2024-05</option>
+        <option value="2024-04">Season 2024-04</option>
+        <option value="2024-03">Season 2024-03</option>
+        <option value="2024-02">Season 2024-02</option>
+        <option value="2024-01">Season 2024-01</option>
+        <option value="2023-12">Season 2023-12</option>
+        <option value="2023-11">Season 2023-11</option>
+        <option value="2023-10">Season 2023-10</option>
+        <option value="2023-09">Season 2023-09</option>
+        <option value="2023-08">Season 2023-08</option>
+        <option value="2023-07">Season 2023-07</option>
+        <option value="2023-06">Season 2023-06</option>
+        <option value="2023-05">Season 2023-05</option>
+        <option value="2023-04">Season 2023-04</option>
+        <option value="2023-03">Season 2023-03</option>
+        <option value="2023-02">Season 2023-02</option>
+        <option value="2023-01">Season 2023-01</option>
+      </select>
+    </div>
+    <div id="leaderboard"></div>
 
-  
-
-
-<div class="SeasonSelecter">
-    <label for="seasonSelect">Season auswählen:</label>
-  <select id="seasonSelect">
-  <option value="2025-11">Season 2025-11</option>
-  <option value="2025-10">Season 2025-10</option>
-  <option value="2025-09">Season 2025-09</option>
-  <option value="2025-08">Season 2025-08</option>
-  <option value="2025-07">Season 2025-07</option>
-  <option value="2025-06">Season 2025-06</option>
-  <option value="2025-05">Season 2025-05</option>
-  <option value="2025-04">Season 2025-04</option>
-  <option value="2025-03">Season 2025-03</option>
-  <option value="2025-02">Season 2025-02</option>
-  <option value="2025-01">Season 2025-01</option>
-  <option value="2024-12">Season 2024-12</option>
-  <option value="2024-11">Season 2024-11</option>
-  <option value="2024-10">Season 2024-10</option>
-  <option value="2024-09">Season 2024-09</option>
-  <option value="2024-08">Season 2024-08</option>
-  <option value="2024-07">Season 2024-07</option>
-  <option value="2024-06">Season 2024-06</option>
-  <option value="2024-05">Season 2024-05</option>
-  <option value="2024-04">Season 2024-04</option>
-  <option value="2024-03">Season 2024-03</option>
-  <option value="2024-02">Season 2024-02</option>
-  <option value="2024-01">Season 2024-01</option>
-  <option value="2023-12">Season 2023-12</option>
-  <option value="2023-11">Season 2023-11</option>
-  <option value="2023-10">Season 2023-10</option>
-  <option value="2023-09">Season 2023-09</option>
-  <option value="2023-08">Season 2023-08</option>
-  <option value="2023-07">Season 2023-07</option>
-  <option value="2023-06">Season 2023-06</option>
-  <option value="2023-05">Season 2023-05</option>
-  <option value="2023-04">Season 2023-04</option>
-  <option value="2023-03">Season 2023-03</option>
-  <option value="2023-02">Season 2023-02</option>
-  <option value="2023-01">Season 2023-01</option>
-</select>
-</div>
-      <div id="leaderboard"></div>
-
-
-       <script src="script.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

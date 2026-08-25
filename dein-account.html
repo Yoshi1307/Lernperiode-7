@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
@@ -9,48 +9,52 @@
   </head>
 
   <body>
-     <nav>
+    <nav>
       <div class="nav-container">
         <a href="index.html" id="site-title">ClashStats</a>
-      <div class="nav-right">
-        <form action="Profile.html" method="get" class="search-form">
-          <input type="text" id="playerTag" name="tag" placeholder="SpielerID eingeben">
-          <button type="submit" style="display:none">Suchen</button>
-        </form>
-      <div class="nav-links">
-        <a href="dein-account.html" class="active">Dein Account</a>
-        <a href="karten.html">Karten</a>
-        <a href="leaderboard.html">Rangliste</a>
-        <a href="clan.html">Clan</a>
+        <div class="nav-right">
+          <form action="Profile.html" method="get" class="search-form">
+            <input
+              type="text"
+              id="playerTag"
+              name="tag"
+              placeholder="SpielerID eingeben"
+            />
+            <button type="submit" style="display: none">Suchen</button>
+          </form>
+          <div class="nav-links">
+            <a href="dein-account.html" class="active">Dein Account</a>
+            <a href="karten.html">Karten</a>
+            <a href="leaderboard.html">Rangliste</a>
+            <a href="clan.html">Clan</a>
+          </div>
+        </div>
       </div>
-      </div>
-      </div>
-     </nav>
+    </nav>
 
+    <div id="idPrompt" style="display: none">
+      <h2>Spieler-ID eingeben</h2>
+      <input type="text" id="inputTag" placeholder="#ABCDEFG" />
+      <button id="saveTagBtn">Speichern</button>
+    </div>
 
-     <div id="idPrompt" style="display:none;">
-        <h2>Spieler-ID eingeben</h2>
-        <input type="text" id="inputTag" placeholder="#ABCDEFG">
-        <button id="saveTagBtn">Speichern</button>
-     </div>
+    <div id="accountInfo" style="display: none">
+      <h2>Dein gespeicherter Account</h2>
+      <div id="profileData"></div>
 
-
-     <div id="accountInfo" style="display:none;">
-        <h2>Dein gespeicherter Account</h2>
-        <div id="profileData"></div>
-
-      <div id="cardSortBar" style="margin:15px 0; display:none;">
-          <label for="sortSelect">Sortieren nach: </label>
-            <select id="sortSelect">
-              <option value="level">Level</option>
-              <option value="elixir">Elixier</option>
-            </select>
+      <div id="cardSortBar" style="margin: 15px 0; display: none">
+        <label for="sortSelect">Sortieren nach: </label>
+        <select id="sortSelect">
+          <option value="level">Level</option>
+          <option value="elixir">Elixier</option>
+          <option value="rarity">Seltenheit</option>
+        </select>
       </div>
 
-        <br>
-        <button id="changeTagBtn">ID ändern</button>
-     </div>
+      <br />
+      <button id="changeTagBtn">ID ändern</button>
+    </div>
 
-     <script src="script.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
